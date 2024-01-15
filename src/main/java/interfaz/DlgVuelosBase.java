@@ -6,7 +6,6 @@ package interfaz;
 
 import datos.Aeropuerto;
 import datos.VueloBase;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,7 +16,7 @@ import static logica.LogicaNegocio.aeropuertoBase;
 
 /**
  *
- * @author usuario
+ * @author jrubioa
  */
 public class DlgVuelosBase extends javax.swing.JDialog {
 
@@ -62,16 +61,15 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         
         this.txtDiasSemanaVuelo.setText(this.vueloBase.getDiasSemanaVuelo());
         
-        LogicaNegocio.getAllAeropuertos().forEach(m->this.cbCodigoIataDestino.addItem(m));
-        LogicaNegocio.getAllAeropuertos().forEach(m->this.cbCodigoIataOrigen.addItem(m));
+        LogicaNegocio.getAllVueloBase().forEach(m->this.cbCodigoIataDestino.addItem(m));
+        LogicaNegocio.getAllVueloBase().forEach(m->this.cbCodigoIataOrigen.addItem(m));
         
         pulIataOrigen = cbCodigoIataOrigen.getSelectedItem().toString();
         pulIataDestino = cbCodigoIataDestino.getSelectedItem().toString();
-        
         System.out.println("Prueba javi " +pulIataOrigen );
         System.out.println("Prueba javi " +pulIataDestino );
         
-        if(pulIataOrigen == "OVD" || pulIataDestino == "OVD"){
+        if(pulIataOrigen == "OVD\\ W" || pulIataDestino == "\\ WOVD"){
             txtError.setText("");
             btnGuardar.setEnabled(true);
             //txtError.setText("Nota: Recuerde que su Base es OVD, solo se puede gestionar vuelos con este codigo. Gracias");
@@ -233,8 +231,7 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         if(isvalid &&(pulIataOrigen == "OVD" || pulIataDestino == "OVD" )){
             try {
                 this.change = true;
-                // Se modifican los datos anteriores
-                // Ademas se controla si la compañia es nula o no
+
                 if (this.vueloBase == null){
                     this.vueloBase = new VueloBase();
                 }
@@ -274,8 +271,8 @@ public class DlgVuelosBase extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<Aeropuerto> cbCodigoIataDestino;
-    private javax.swing.JComboBox<Aeropuerto> cbCodigoIataOrigen;
+    private javax.swing.JComboBox<VueloBase> cbCodigoIataDestino;
+    private javax.swing.JComboBox<VueloBase> cbCodigoIataOrigen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

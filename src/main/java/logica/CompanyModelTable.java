@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author usuario
+ * @author jrubioa
  */
 public class CompanyModelTable extends AbstractTableModel{
     

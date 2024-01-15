@@ -39,16 +39,12 @@ public class DlgDatosCompany extends javax.swing.JDialog {
         
         // Caso de que se añada una nueva compañia
         if(company == null || company.getCodigo().isBlank()){
-            //btnEditar.setEnabled(false);
-            btnGuardar.setEnabled(true);
-            setControlState(true);
-        }else{
-            //btnEditar.setEnabled(true);
             btnGuardar.setEnabled(false);
             setControlState(false);
             
-            txtCodigo.setEditable(false);
-            txtPrefijo.setEditable(false);
+        }else{
+            btnGuardar.setEnabled(true);
+            setControlState(true);
         }
     }
 
@@ -258,9 +254,8 @@ public class DlgDatosCompany extends javax.swing.JDialog {
 
     // Metodo que se usa para desabilitar o habilitar controles
     private void setControlState(boolean state) {
-        //this.txtCodigo.setEditable(state);
-        //this.txtPrefijo.setEditable(state);
-        
+        this.txtCodigo.setEditable(state);
+        this.txtPrefijo.setEditable(state);
         this.txtDireccion.setEditable(state);
         this.txtNombre.setEditable(state);
         this.txtTelAeropuerto.setEditable(state);

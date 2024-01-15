@@ -191,7 +191,7 @@ public class FrmVuelosBase extends javax.swing.JFrame {
         //Nos da dal compañia de la fila selecionada
         VueloBase comp_select = LogicaNegocio.getAllVueloBase().get(tblVuelosBase.getSelectedRow());
         int respuesta_borrado =JOptionPane.showConfirmDialog(this, "¿Desea borrar la fila seleciona? "+comp_select.getCodigoVuelo(),
-            "Borrado de compañia ", JOptionPane.YES_NO_OPTION);
+            "Borrado de Vuelo base ", JOptionPane.YES_NO_OPTION);
         if(respuesta_borrado ==JOptionPane.OK_OPTION){
             LogicaNegocio.deleteVueloBase(comp_select.getCodigoVuelo());
         }

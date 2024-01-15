@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author usuario
+ * @author jrubioa
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
@@ -66,6 +66,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().add(brnVuelosBase);
 
         brnVuelosDiarios.setText("Vuelos Diarios");
+        brnVuelosDiarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brnVuelosDiariosActionPerformed(evt);
+            }
+        });
         getContentPane().add(brnVuelosDiarios);
 
         brnCompany.setText("Compañias");
@@ -124,6 +129,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         //Se llama al metodo de abajo con la URL a mostrar
         openWebView("https://educastur-1.gitbook.io/untitled/");
     }//GEN-LAST:event_mmuAyudaActionPerformed
+
+    private void brnVuelosDiariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnVuelosDiariosActionPerformed
+        // TODO add your handling code here:
+        FrmVuelosDiarios vuelos = new FrmVuelosDiarios();
+        vuelos.setVisible(true);
+    }//GEN-LAST:event_brnVuelosDiariosActionPerformed
 
     // Basicamente esto es para que carge la pagina URL
     private void openWebView(String url) { 

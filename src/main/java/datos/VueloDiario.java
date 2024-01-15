@@ -22,8 +22,12 @@ public class VueloDiario {
     private int numeroPlazas;
     private float precio;
     
+     // contructor por defecto
+    public VueloDiario(){
+        
+    }
+    
     // Se crea el contructor sin el VueloBase
-
     public VueloDiario(String codigoVueloBase, Date fechaVuelo, Date horaSalidaReal, Date horaLegadaReal, int numeroPlazas, float precio) {
         this.codigoVueloBase = codigoVueloBase;
         this.fechaVuelo = fechaVuelo;
@@ -99,7 +103,5 @@ public class VueloDiario {
     public void setPrecio(float precio) {
         this.precio = precio;
     }
-    
-    
     
 }

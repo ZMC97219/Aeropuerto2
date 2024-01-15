@@ -4,36 +4,38 @@
  */
 package interfaz;
 
-import datos.Company;
+import datos.VueloDiario;
 import javax.swing.JOptionPane;
-import logica.CompanyModelTable;
 import logica.LogicaNegocio;
+import logica.VuelosBaseModelTable;
+import logica.VuelosDiariosModelTable;
 
 /**
  *
- * @author jrubioa
+ * @author usuario
  */
-public class FrmCompany extends javax.swing.JFrame {
+public class FrmVuelosDiarios extends javax.swing.JFrame {
 
     // Se utiliza el patron Singleton, con el fin de que se actualice siempre la misma ventana
     //Por tanto se decalara lo siguiente
     // De esta manera si ya esta instanciada, devuelve la misma y en caso de que no este instalaciada (caso null), crearia una nueva
     
-    private static FrmCompany INSTANCE = null;
+    private static FrmVuelosDiarios INSTANCE = null;
     
-    public static FrmCompany getInstance() {
+    public static FrmVuelosDiarios getInstance() {
         if (INSTANCE == null) { 
-            INSTANCE = new FrmCompany();
+            INSTANCE = new FrmVuelosDiarios();
         }
         return INSTANCE;
     }
     
     /**
-     * Creates new form FrmCompany
+     * Creates new form FrmVuelosDiarios
      */
-    public FrmCompany() {
+    public FrmVuelosDiarios() {
         initComponents();
-        fillTableCompany();
+        
+        fillTableVuelosDiarios();
     }
 
     /**
@@ -46,19 +48,14 @@ public class FrmCompany extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCompany = new javax.swing.JTable();
+        tblVuelosBase = new javax.swing.JTable();
         btnEditar = new javax.swing.JButton();
         btnAnadir = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblVuelosDarios = new javax.swing.JTable();
 
-        setTitle("Compañias del Aeropuerto");
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
-
-        tblCompany.setModel(new javax.swing.table.DefaultTableModel(
+        tblVuelosBase.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -69,7 +66,14 @@ public class FrmCompany extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblCompany);
+        jScrollPane1.setViewportView(tblVuelosBase);
+
+        setTitle("GESTION DE VUELOS DIARIOS");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnEditar.setText("Editar o Consultar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,85 +97,91 @@ public class FrmCompany extends javax.swing.JFrame {
             }
         });
 
+        tblVuelosDarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tblVuelosDarios);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(94, 94, 94)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEditar)
-                        .addGap(39, 39, 39)
+                        .addGap(46, 46, 46)
                         .addComponent(btnAnadir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                        .addComponent(btnEliminar)))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnAnadir)
                     .addComponent(btnEliminar))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(55, 55, 55))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        //Nos da dal compañia de la fila selecionada
-        Company comp_select = LogicaNegocio.getAllCompany().get(tblCompany.getSelectedRow());
-        int respuesta_borrado =JOptionPane.showConfirmDialog(this, "¿Desea borrar la fila seleciona? "+comp_select.getCodigo(), 
-                "Borrado de compañia ", JOptionPane.YES_NO_OPTION);
-        if(respuesta_borrado ==JOptionPane.OK_OPTION){
-            LogicaNegocio.deleteCompany(comp_select.getPrefijo());
-        }
-        //con el fin de que refrescar la tabla
-        fillTableCompany();
-    }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
-        //Company comp_select = (Company) LogicaNegocio.getAllCompany();
-        
-        DlgDatosCompany dlgDatosCompany = new DlgDatosCompany(this, true, null);
-        dlgDatosCompany.setVisible(true);
-        // Solamente si se ha cambiado se actualiza y se añade la compañia
-        if (dlgDatosCompany.isChange()){
-            // Se añade la nueva compañia
-            LogicaNegocio.addCompany(dlgDatosCompany.getCompany());
-            // Se actualiza la tabla de la interface
-            this.fillTableCompany();
-        }
-        
-    }//GEN-LAST:event_btnAnadirActionPerformed
-
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-        //Nos da dal compañia de la fila selecionada
-       Company comp_select = LogicaNegocio.getAllCompany().get(tblCompany.getSelectedRow());
-       
-       DlgDatosCompany dlgDatosCompany = new DlgDatosCompany(this, true, comp_select);
-       dlgDatosCompany.setCompany(comp_select);
-       dlgDatosCompany.setVisible(true);
-        
-       if (dlgDatosCompany.isChange()){
-            LogicaNegocio.updateCompany(comp_select, dlgDatosCompany.getCompany());
-            fillTableCompany();
+
+        VueloDiario comp_select = LogicaNegocio.getAllVueloDiario().get(tblVuelosDarios.getSelectedRow());
+
+        DlgVuelosDiarios dlgDatosVueloDiario = new DlgVuelosDiarios(this, true, comp_select);
+        dlgDatosVueloDiario.setVueloDiario(comp_select);
+        dlgDatosVueloDiario.setVisible(true);
+
+        if (dlgDatosVueloDiario.isChange()){
+            LogicaNegocio.updateVueloDiario(comp_select, dlgDatosVueloDiario.getVueloDiario());
+            fillTableVuelosDiarios();
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+        DlgVuelosDiarios dlgDatosVueloDiario = new DlgVuelosDiarios(this, true, null);
+        dlgDatosVueloDiario.setVisible(true);
+
+        if (dlgDatosVueloDiario.isChange()){
+            LogicaNegocio.addVueloDiario(dlgDatosVueloDiario.getVueloDiario());
+            this.fillTableVuelosDiarios();
+        }
+    }//GEN-LAST:event_btnAnadirActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        //Nos da dal compañia de la fila selecionada
+        VueloDiario comp_select = LogicaNegocio.getAllVueloDiario().get(tblVuelosDarios.getSelectedRow());
+        int respuesta_borrado =JOptionPane.showConfirmDialog(this, "¿Desea borrar la fila seleciona? "+comp_select.getCodigoVueloBase(),
+            "Borrado de Vuelo Diario ", JOptionPane.YES_NO_OPTION);
+        if(respuesta_borrado ==JOptionPane.OK_OPTION){
+            LogicaNegocio.deleteVueloDiario(comp_select.getCodigoVueloBase());
+        }
+        //con el fin de que refrescar la tabla
+        fillTableVuelosDiarios();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        LogicaNegocio.escribirCompany(LogicaNegocio.getAllCompany());
+        LogicaNegocio.escribirVueloDario(LogicaNegocio.getAllVueloDiario());
     }//GEN-LAST:event_formWindowClosing
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -179,11 +189,14 @@ public class FrmCompany extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblCompany;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblVuelosBase;
+    private javax.swing.JTable tblVuelosDarios;
     // End of variables declaration//GEN-END:variables
 
-    private void fillTableCompany() {
-        tblCompany.setModel(new CompanyModelTable(LogicaNegocio.getAllCompany()));
+    private void fillTableVuelosDiarios() {
+        tblVuelosDarios.setModel(new VuelosDiariosModelTable(LogicaNegocio.getAllVueloDiario()));
         
     }
+
 }

@@ -124,4 +124,9 @@ public class VueloBase {
     }
     
     
+    @Override
+    public String toString() {
+        return this.getCodigoIATAOrigen() + this.getCodigoIATADestino();
+    }
+    
 }

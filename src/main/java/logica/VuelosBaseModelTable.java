@@ -87,4 +87,13 @@ public class VuelosBaseModelTable extends AbstractTableModel{
         
     }
     
+    @Override
+    public Class getColumnClass(int col) {
+        return this.columnClasses.get(col);
+    }
+    @Override
+    public String getColumnName(int col) {
+        return this.columnNames.get(col);
+    }
+    
 }

@@ -4,7 +4,6 @@
  */
 package interfaz;
 
-
 import datos.Temperatura;
 import java.awt.Dimension;
 

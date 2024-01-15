@@ -13,6 +13,7 @@ import datos.Company;
 import datos.Municipio;
 import datos.Temperatura;
 import datos.VueloBase;
+import datos.VueloDiario;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -40,13 +41,18 @@ public class LogicaNegocio {
         fillMunicipiosList();
         fillAeropuertosList();
         
-        // inicializamos una lista de compañias. Esto tiene que ser por el csv
         //fillCompanyList();
         leerCompany();
         try {
             leerVueloBase();
         } catch (ParseException ex) {
             Logger.getLogger("error al leer Vuelos Base");
+        }
+        
+        try {
+            leerVueloDario();
+        } catch (ParseException ex) {
+            Logger.getLogger("error al leer Vuelos Diarios");
         }
         
         
@@ -271,7 +277,7 @@ public class LogicaNegocio {
         return sdf.format(fecha);
     }
     
-     public static void leerVueloBase() throws ParseException {
+    public static void leerVueloBase() throws ParseException {
         try {
             String l;
             String[] leer;
@@ -378,6 +384,110 @@ public class LogicaNegocio {
     // </editor-fold> 
     
     // <editor-fold defaultstate="collapsed" desc="Vuelos Diarios"> 
+    
+    
+    public static void leerVueloDario() throws ParseException {
+        try {
+            String l;
+            String[] leer;
+            SimpleDateFormat sdF = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdH = new SimpleDateFormat("HH:mm");
+            FileReader file= new FileReader("src/main/resources/vueloDiario.csv");
+            BufferedReader br = new BufferedReader(file);
+            while ((l = br.readLine()) != null) {
+                leer= l.split(",");
+                String codigoVueloBase = leer[0];
+                Date fechaVuelo = sdF.parse(leer[1]);
+                Date horaSalidaReal = sdH.parse(leer[2]);
+                Date horaLegadaReal = sdH.parse(leer[3]);
+                int numeroPlazas = Integer.parseInt(leer[4]);
+                float precio = Float.parseFloat(leer[5]);
+                
+                VueloDiario vueloDiario = new VueloDiario(codigoVueloBase, fechaVuelo, horaSalidaReal, horaLegadaReal,numeroPlazas, precio);
+                
+                addVueloDiario(vueloDiario);
+            }
+
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(LogicaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(LogicaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void escribirVueloDario(List<VueloDiario> Vuelo) {
+        try {
+            
+            FileWriter f = new FileWriter("src/main/resources/vueloDiario.csv");
+            SimpleDateFormat sdF = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat sdH = new SimpleDateFormat("HH:mm");
+            
+            for (VueloDiario VueloDiario : Vuelo) {
+                f.write(String.valueOf(VueloDiario.getCodigoVueloBase()));
+                f.write(",");
+                f.write(sdF.format(VueloDiario.getFechaVuelo()));
+                f.write(",");
+                f.write(sdH.format(VueloDiario.getHoraSalidaReal()));
+                f.write(",");
+                f.write(sdH.format(VueloDiario.getHoraLegadaReal()));
+                f.write(",");
+                f.write(String.valueOf(VueloDiario.getNumeroPlazas()));
+                f.write(",");
+                f.write(String.valueOf(VueloDiario.getPrecio()));
+                f.write("\n");
+            }
+            
+            f.close();
+        } catch (IOException ex) {
+            Logger.getLogger(LogicaNegocio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println("Se ha escrito el fichero vueloDiario.csv");
+        
+    }
+    
+    
+    private static List<VueloDiario> lstVueloDiario = new ArrayList<>();
+    
+    // Obtiene toda la coleccion de vuelos diarios
+    public static List<VueloDiario> getAllVueloDiario(){
+        return lstVueloDiario;
+    }
+            
+    
+    public static VueloDiario getVueloDiarioByCodigo (String codigo){
+        
+        Optional<VueloDiario> vueloDiarioByCodigo = lstVueloDiario.stream()
+                .filter(a-> a.getCodigoVueloBase().equals(codigo))
+                .findFirst();
+
+        return vueloDiarioByCodigo.isPresent() ? vueloDiarioByCodigo.get(): null;
+    }
+    
+    
+    public static void addVueloDiario (VueloDiario vueloDiario){
+        lstVueloDiario.add(vueloDiario);
+    }
+    
+    public static void deleteVueloDiario (String codigoVuelo){
+        // Usamos el prefijo para borrar la compañia. Para esto buscamos la compañia que tenga el prefijo y a continuacion la borramos
+        VueloDiario VueloDiario = getVueloDiarioByCodigo(codigoVuelo);
+        lstVueloDiario.remove(VueloDiario);
+    }
+    
+    public static void updateVueloDiario (VueloDiario oldVueloDiario, VueloDiario newVueloDiario){
+        VueloDiario actual= getVueloDiarioByCodigo(oldVueloDiario.getCodigoVueloBase());
+        
+        actual.setCodigoVueloBase(newVueloDiario.getCodigoVueloBase());
+        actual.setFechaVuelo(newVueloDiario.getFechaVuelo());
+        actual.setHoraSalidaReal(newVueloDiario.getHoraSalidaReal());
+        actual.setHoraLegadaReal(newVueloDiario.getHoraLegadaReal());
+        actual.setNumeroPlazas(newVueloDiario.getNumeroPlazas());
+        actual.setPrecio(newVueloDiario.getPrecio());
+        
+    }
     
     
     
