@@ -20,7 +20,7 @@ import logica.LogicaNegocio;
 
 /**
  *
- * @author usuario
+ * @author jrubioa
  */
 public class FrmRestTemp extends javax.swing.JFrame {
 
