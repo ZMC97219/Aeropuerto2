@@ -49,7 +49,7 @@ public class DlgVuelosBase extends javax.swing.JDialog {
     public DlgVuelosBase(java.awt.Frame parent, boolean modal, VueloBase vueloBase) {
         super(parent, modal);
         initComponents();
-        btnGuardar.setEnabled(false);
+        //btnGuardar.setEnabled(false);
         
         this.vueloBase = vueloBase;
         this.txtCodigoVuelo.setText(this.vueloBase.getCodigoVuelo());
@@ -69,16 +69,16 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         System.out.println("Prueba javi " +pulIataOrigen );
         System.out.println("Prueba javi " +pulIataDestino );
         
-        if(pulIataOrigen == "OVD\\ W" || pulIataDestino == "\\ WOVD"){
-            txtError.setText("");
+        //if(pulIataOrigen == "OVD\\ W" || pulIataDestino == "\\ WOVD"){
+            //txtError.setText("");
             btnGuardar.setEnabled(true);
             //txtError.setText("Nota: Recuerde que su Base es OVD, solo se puede gestionar vuelos con este codigo. Gracias");
+            //txtError.setEnabled(false);
+        //}else{
+            //btnGuardar.setEnabled(false);
+            //txtError.setText("Nota: Por favor, no puede gestionar vuelos fuera de su Base OVD, seleciona OVD. Gracias");
             txtError.setEnabled(false);
-        }else{
-            btnGuardar.setEnabled(false);
-            txtError.setText("Nota: Por favor, no puede gestionar vuelos fuera de su Base OVD, seleciona OVD. Gracias");
-            txtError.setEnabled(false);
-        }
+        //}
         
     }
     
@@ -228,7 +228,7 @@ public class DlgVuelosBase extends javax.swing.JDialog {
 
         this.validate();
         this.isvalid=true;
-        if(isvalid &&(pulIataOrigen == "OVD" || pulIataDestino == "OVD" )){
+        //if(isvalid &&(pulIataOrigen == "OVD" || pulIataDestino == "OVD" )){
             try {
                 this.change = true;
 
@@ -251,11 +251,11 @@ public class DlgVuelosBase extends javax.swing.JDialog {
             }
 
 
-        }else{
+        //}else{
             this.change = false;
             txtError.setText("Nota: Por favor, no puede gestionar vuelos fuera de su Base OVD, seleciona OVD. Gracias");
             txtError.setEnabled(false);
-        }
+        //}
 
         this.setVisible(false);
     }//GEN-LAST:event_btnGuardarActionPerformed

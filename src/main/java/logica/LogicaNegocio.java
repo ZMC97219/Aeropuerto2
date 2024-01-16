@@ -28,6 +28,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 import java.text.ParseException;
+import static java.time.Instant.now;
+import java.time.LocalDate;
 
 /**
  * Clase donde se agrupan los metedos y funciones para dar soporte a la logistica del Aeropuerto
@@ -226,6 +228,14 @@ public class LogicaNegocio {
      */
     public static List<Company> getAllCompany(){
         return lstCompanys;
+    }
+    
+    
+    public static Company getCompanyaByNombre(String nombre) {
+        Optional<Company> companyByNombre = lstCompanys.stream()
+                .filter(a -> a.getNombre().equals(nombre))
+                .findFirst();
+        return companyByNombre.isPresent() ? companyByNombre.get() : null;
     }
             
     
@@ -535,4 +545,23 @@ public class LogicaNegocio {
     }
 
     // </editor-fold> 
+    
+    // <editor-fold defaultstate="collapsed" desc="Logica de panel de vuelos por compañía">
+    private static List<VueloDiario> lstPanelVuelosCompany = new ArrayList<>();
+    
+    public static List<VueloDiario> getVuelosCompany(Date fecha_Buscar, Company company_Buscar) {
+        lstPanelVuelosCompany.clear();
+
+        for (VueloDiario vuelo : lstVueloDiario) {
+            Date fecha_Vuelo = vuelo.getFechaVuelo();
+            String codigo_Company = vuelo.getCodigoVueloBase().substring(0, 2);
+            Company compVuelo = getCompanyByCodigo(codigo_Company);
+            if ((fecha_Vuelo.equals(fecha_Buscar)) && (compVuelo.equals(company_Buscar))) {
+                lstPanelVuelosCompany.add(vuelo);
+            }
+        }
+        return lstPanelVuelosCompany;
+    }
+
+    // </editor-fold>
 }

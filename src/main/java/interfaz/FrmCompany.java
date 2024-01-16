@@ -141,6 +141,7 @@ public class FrmCompany extends javax.swing.JFrame {
         //Company comp_select = (Company) LogicaNegocio.getAllCompany();
         
         DlgDatosCompany dlgDatosCompany = new DlgDatosCompany(this, true, null);
+        //dlgDatosCompany.setCompany(comp_select);
         dlgDatosCompany.setVisible(true);
         // Solamente si se ha cambiado se actualiza y se añade la compañia
         if (dlgDatosCompany.isChange()){

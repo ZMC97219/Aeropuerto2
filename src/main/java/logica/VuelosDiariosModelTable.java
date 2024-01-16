@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class VuelosDiariosModelTable extends AbstractTableModel{
 
-     private List<VueloDiario> listaVueloDiario;
+    private List<VueloDiario> listaVueloDiario;
     private ArrayList<String> columnNames; // nombre de las columnas
     private ArrayList<Class> columnClasses; // Clases de las columnas
     
@@ -44,7 +44,8 @@ public class VuelosDiariosModelTable extends AbstractTableModel{
     
     @Override
     public int getRowCount() {
-        return listaVueloDiario.size();
+        //return 6;
+        return this.listaVueloDiario.size();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class VuelosDiariosModelTable extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
 
         SimpleDateFormat sdH = new SimpleDateFormat("HH:mm");
-        SimpleDateFormat sdF = new SimpleDateFormat("DD/MM/YYY");
+        SimpleDateFormat sdF = new SimpleDateFormat("dd/MM/yyyy");
 
         VueloDiario vueloDiario = this.listaVueloDiario.get(rowIndex);
         switch (columnIndex) {

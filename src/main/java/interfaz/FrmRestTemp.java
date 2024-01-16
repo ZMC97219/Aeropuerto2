@@ -60,6 +60,8 @@ public class FrmRestTemp extends javax.swing.JFrame {
         txtTempMin = new javax.swing.JTextField();
         txtError = new javax.swing.JTextField();
         btnPanel = new javax.swing.JButton();
+        btnPanel1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         mmuAyudaMain = new javax.swing.JMenu();
         mmuAyuda = new javax.swing.JMenuItem();
@@ -83,6 +85,20 @@ public class FrmRestTemp extends javax.swing.JFrame {
         jLabel3.setText("TempMin:");
 
         btnPanel.setText("PANEL DE SALIDAS");
+        btnPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPanelActionPerformed(evt);
+            }
+        });
+
+        btnPanel1.setText("PANEL DE LLEGADAS");
+
+        jButton2.setText("PANEL DE COMPAÑIAS");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         mmuAyudaMain.setText("Ayuda");
 
@@ -127,7 +143,9 @@ public class FrmRestTemp extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtError)
-                    .addComponent(btnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+                    .addComponent(btnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .addComponent(btnPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -154,7 +172,11 @@ public class FrmRestTemp extends javax.swing.JFrame {
                 .addComponent(txtError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPanel)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPanel1)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,6 +208,23 @@ public class FrmRestTemp extends javax.swing.JFrame {
         openWebView("https://educastur-1.gitbook.io/llamada-a-la-api-servicios-rest-de-la-aemet/");
     }//GEN-LAST:event_mmuAyudaActionPerformed
 
+    private void btnPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPanelActionPerformed
+        // TODO add your handling code here:
+        //PpanelSalida temp = new PpanelSalida();
+        //temp.setVisible(true);
+        
+        FrmPanelSalida temp = new FrmPanelSalida();
+        temp.setVisible(true);
+        
+        
+    }//GEN-LAST:event_btnPanelActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        FrmPanelCompany temp = new FrmPanelCompany();
+        temp.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Basicamente esto es para que carge la pagina URL
     private void openWebView(String url) { 
             Platform.runLater(() -> { 
@@ -202,7 +241,9 @@ public class FrmRestTemp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnPanel;
+    private javax.swing.JButton btnPanel1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

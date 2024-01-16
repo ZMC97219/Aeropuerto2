@@ -56,6 +56,16 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
         this.txtHoraLegadaReal.setText(sdH.format(this.vueloDiario.getHoraLegadaReal()));
         this.txtNumeroPlazas.setText(String.valueOf(this.vueloDiario.getNumeroPlazas()));
         this.txtPrecio.setText(String.valueOf(this.vueloDiario.getPrecio()));
+        
+        // Caso de que se añada una nueva compañia
+        if(vueloDiario == null || vueloDiario.getCodigoVueloBase().isBlank()){
+            btnGuardar.setEnabled(false);
+            setControlState(false);
+            
+        }else{
+            btnGuardar.setEnabled(true);
+            setControlState(true);
+        }
 
     }
 
