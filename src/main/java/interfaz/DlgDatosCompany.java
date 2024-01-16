@@ -32,19 +32,20 @@ public class DlgDatosCompany extends javax.swing.JDialog {
         this.txtNombre.setText(this.company.getNombre());
         this.txtPrefijo.setText(String.valueOf(this.company.getPrefijo()));
         this.txtTelAeropuerto.setText(this.company.getTelefonoAeropuerto());
-        this.txtTelUsuario.setText(this.company.getTelefonoPasajero());       
+        this.txtTelUsuario.setText(this.company.getTelefonoPasajero());
         
         
         LogicaNegocio.getAllMunicipios().forEach(m->this.cbMunicipios.addItem(m));
         
         // Caso de que se añada una nueva compañia
         if(company == null || company.getCodigo().isBlank()){
-            btnGuardar.setEnabled(false);
-            setControlState(false);
+            btnGuardar.setEnabled(true);
+            setControlState(true);
             
         }else{
             btnGuardar.setEnabled(true);
             setControlState(true);
+
         }
     }
 

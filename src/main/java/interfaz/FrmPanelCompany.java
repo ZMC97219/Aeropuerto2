@@ -57,6 +57,7 @@ public class FrmPanelCompany extends javax.swing.JFrame {
         tblPanelCompany = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         cbCompany = new javax.swing.JComboBox<>();
+        txtError = new javax.swing.JTextField();
 
         setTitle("Panel de Compañias");
 
@@ -88,11 +89,12 @@ public class FrmPanelCompany extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtError)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -124,7 +126,9 @@ public class FrmPanelCompany extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(btnBuscar)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(txtError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,6 +144,13 @@ public class FrmPanelCompany extends javax.swing.JFrame {
             Date fecha_Buscar = sdH.parse(txtFecha.getText());
             Company company_Buscar = LogicaNegocio.getCompanyaByNombre(cbCompany.getSelectedItem().toString());
             tblPanelCompany.setModel(new CompanyVuelosModelTable(LogicaNegocio.getVuelosCompany(fecha_Buscar,company_Buscar))); 
+            if(LogicaNegocio.getVuelosCompany(fecha_Buscar,company_Buscar).isEmpty()){
+                txtError.setText("No existe ningún vuelo");
+                txtError.setEnabled(true);
+            }else{
+                txtError.setText("");
+                txtError.setEnabled(false);
+            }
             
         } catch (ParseException ex) {
             Logger.getLogger("Fallo");
@@ -154,6 +165,7 @@ public class FrmPanelCompany extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPanelCompany;
+    private javax.swing.JTextField txtError;
     private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 
