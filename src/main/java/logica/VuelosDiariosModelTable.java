@@ -35,7 +35,7 @@ public class VuelosDiariosModelTable extends AbstractTableModel{
         columnClasses.add(String.class);
         columnClasses.add(String.class);
         columnClasses.add(String.class);
-        columnClasses.add(Integer.class);
+        columnClasses.add(String.class);
         columnClasses.add(Float.class);
         
     }
@@ -73,7 +73,7 @@ public class VuelosDiariosModelTable extends AbstractTableModel{
                 String horaLlegadaReal = sdH.format(vueloDiario.getHoraLegadaReal());
                 return horaLlegadaReal;
             case 4:
-                return vueloDiario.getNumeroPlazas();
+                return String.valueOf(vueloDiario.getNumeroPlazas());
             case 5:
                 return vueloDiario.getPrecio();
             default:

@@ -61,13 +61,14 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         
         this.txtDiasSemanaVuelo.setText(this.vueloBase.getDiasSemanaVuelo());
         
-        LogicaNegocio.getAllVueloBase().forEach(m->this.cbCodigoIataDestino.addItem(m));
-        LogicaNegocio.getAllVueloBase().forEach(m->this.cbCodigoIataOrigen.addItem(m));
+        LogicaNegocio.getAllAeropuertos().forEach(m->this.cbCodigoIataDestino.addItem(m));
+        LogicaNegocio.getAllAeropuertos().forEach(m->this.cbCodigoIataOrigen.addItem(m));
+        
+        cbCodigoIataDestino.setSelectedItem(LogicaNegocio.getAeropuertoByCodigoIATA(this.vueloBase.getCodigoIATADestino()));
         
         pulIataOrigen = cbCodigoIataOrigen.getSelectedItem().toString();
         pulIataDestino = cbCodigoIataDestino.getSelectedItem().toString();
-        System.out.println("Prueba javi " +pulIataOrigen );
-        System.out.println("Prueba javi " +pulIataDestino );
+        
         
         //if(pulIataOrigen == "OVD\\ W" || pulIataDestino == "\\ WOVD"){
             //txtError.setText("");
@@ -227,8 +228,13 @@ public class DlgVuelosBase extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         this.validate();
+        pulIataOrigen = cbCodigoIataOrigen.getSelectedItem().toString();
+        pulIataDestino = cbCodigoIataDestino.getSelectedItem().toString();
+        System.out.println("Prueba javi " +pulIataOrigen );
+        System.out.println("Prueba javi " +pulIataDestino );
+        
         this.isvalid=true;
-        //if(isvalid &&(pulIataOrigen == "OVD" || pulIataDestino == "OVD" )){
+        if(isvalid &&(pulIataOrigen.equals("OVD") || pulIataDestino.equals("OVD") )){
             try {
                 this.change = true;
 
@@ -237,27 +243,28 @@ public class DlgVuelosBase extends javax.swing.JDialog {
                 }
                 this.vueloBase.setCodigoVuelo(txtCodigoVuelo.getText());
 
-                VueloBase o = (VueloBase)cbCodigoIataOrigen.getSelectedItem();
-                this.vueloBase.setCodigoIATAOrigen(o.getCodigoIATAOrigen());
-                VueloBase d = (VueloBase)cbCodigoIataDestino.getSelectedItem();
-                this.vueloBase.setCodigoIATAOrigen(d.getCodigoIATADestino());
+                Aeropuerto o = (Aeropuerto)cbCodigoIataOrigen.getSelectedItem();
+                this.vueloBase.setCodigoIATAOrigen(o.getCodigoIATA());
+                Aeropuerto d = (Aeropuerto)cbCodigoIataDestino.getSelectedItem();
+                this.vueloBase.setCodigoIATAOrigen(d.getCodigoIATA());
                 
                 this.vueloBase.setNumeroPlazas(Integer.parseInt(txtNumerPlazas.getText()));
                 this.vueloBase.setHoraSalida(sd.parse(txtHoraSalida.getText()));
                 this.vueloBase.setHoraLlegada(sd.parse(txtHoraLlegada.getText()));
                 this.vueloBase.setDiasSemanaVuelo(txtDiasSemanaVuelo.getText());
+                this.setVisible(false);
             } catch (ParseException ex) {
                 Logger.getLogger(DlgVuelosBase.class.getName()).log(Level.SEVERE, null, ex);
             }
 
 
-        //}else{
+        }else{
             this.change = false;
             txtError.setText("Nota: Por favor, no puede gestionar vuelos fuera de su Base OVD, seleciona OVD. Gracias");
             txtError.setEnabled(false);
-        //}
+        }
 
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -271,8 +278,8 @@ public class DlgVuelosBase extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<VueloBase> cbCodigoIataDestino;
-    private javax.swing.JComboBox<VueloBase> cbCodigoIataOrigen;
+    private javax.swing.JComboBox<Aeropuerto> cbCodigoIataDestino;
+    private javax.swing.JComboBox<Aeropuerto> cbCodigoIataOrigen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

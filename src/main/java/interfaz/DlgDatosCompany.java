@@ -200,7 +200,7 @@ public class DlgDatosCompany extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
         this.validate();
-        this.isvalid=true;
+        //this.isvalid=true;
         if(isvalid){
             this.change = true;
             // Se modifican los datos anteriores
@@ -266,6 +266,18 @@ public class DlgDatosCompany extends javax.swing.JDialog {
     }
     
     public void validate(){
+        
         super.validate();
+        int prefijo = txtPrefijo.getText().equals("") ? -1 :Integer.parseInt(txtPrefijo.getText());
+        
+        
+        if(LogicaNegocio.getCompanyByPrefijo(prefijo)!= null 
+            || LogicaNegocio.getCompanyByCodigo(txtCodigo.getText())!= null){
+             isvalid=false;
+            
+        }else{
+            isvalid=true;
+        }
+        
     }
 }

@@ -210,9 +210,6 @@ public class FrmRestTemp extends javax.swing.JFrame {
 
     private void btnPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPanelActionPerformed
         // TODO add your handling code here:
-        //PpanelSalida temp = new PpanelSalida();
-        //temp.setVisible(true);
-        
         FrmPanelSalida temp = new FrmPanelSalida();
         temp.setVisible(true);
         

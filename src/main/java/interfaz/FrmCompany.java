@@ -138,9 +138,17 @@ public class FrmCompany extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
-        //Company comp_select = (Company) LogicaNegocio.getAllCompany();
+        Company comp_select = new Company();
+        comp_select.setPrefijo(0);
+        comp_select.setCodigo("");
+        comp_select.setDireccion("");
+        comp_select.setNombre("");
+        comp_select.setTelefonoAeropuerto("");
+        comp_select.setTelefonoPasajero("");
+        comp_select.setcodigoMunicipio("");
         
-        DlgDatosCompany dlgDatosCompany = new DlgDatosCompany(this, true, null);
+        
+        DlgDatosCompany dlgDatosCompany = new DlgDatosCompany(this, true, comp_select);
         //dlgDatosCompany.setCompany(comp_select);
         dlgDatosCompany.setVisible(true);
         // Solamente si se ha cambiado se actualiza y se añade la compañia
