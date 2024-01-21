@@ -49,9 +49,9 @@
                   <Component id="txtHoraLegadaReal" alignment="0" pref="186" max="32767" attributes="0"/>
                   <Component id="txtHoraSalidaReal" alignment="0" pref="186" max="32767" attributes="0"/>
                   <Component id="btnSalir" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbCodigoVueloBase" max="32767" attributes="0"/>
+                  <Component id="txtCodigoBase" alignment="1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="97" max="32767" attributes="0"/>
+              <EmptySpace pref="91" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -61,7 +61,7 @@
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbCodigoVueloBase" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCodigoBase" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -155,15 +155,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPrecio">
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbCodigoVueloBase">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Aeropuerto&gt;"/>
-      </AuxValues>
+    <Component class="javax.swing.JTextField" name="txtCodigoBase">
     </Component>
   </SubComponents>
 </Form>

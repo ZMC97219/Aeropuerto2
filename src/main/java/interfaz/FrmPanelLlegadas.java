@@ -16,7 +16,7 @@ import logica.LogicaNegocio;
 import logica.VuelosDiariosModelTable;
 
 /**
- *
+ * Formulario donde se muestran los datos del panel de Llegadas del sistema
  * @author jrubioa
  */
 public class FrmPanelLlegadas extends javax.swing.JFrame {
@@ -109,15 +109,27 @@ public class FrmPanelLlegadas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que permite buscar en el sistema
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
             fillTableVuelosDiarios1();
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-private static List<VueloDiario> lstPanelSalida = new ArrayList<>();
+    /**
+     * Lista con las llegadas del sistema
+     */
+    private static List<VueloDiario> lstPanelSalida = new ArrayList<>();
     
-public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
+    /**
+     * Se obtiene los vuelos diarios dado su fecha
+     * @param fecha_Buscar fecha a buscar
+     * @return devuelve el vuelo diario a partir de la fecha
+     */
+    public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
     lstPanelSalida.clear();
     for (VueloDiario vuelo : LogicaNegocio.getAllVueloDiario()) {
         if ((vuelo.getFechaVuelo().equals(fecha_Buscar))) {
@@ -136,6 +148,9 @@ public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
     private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableVuelosDiarios1() {
         try {
             txtError.setText("");
@@ -155,6 +170,9 @@ public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
         
     }
     
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableVuelosDiarios() {
         tblPanelLlegadas.setModel(new VuelosDiariosModelTable(LogicaNegocio.getAllVueloDiario()));
         

@@ -10,7 +10,7 @@ import logica.CompanyModelTable;
 import logica.LogicaNegocio;
 
 /**
- *
+ * Formulario donde se muestran los datos de las comapañias del sistema
  * @author jrubioa
  */
 public class FrmCompany extends javax.swing.JFrame {
@@ -129,6 +129,10 @@ public class FrmCompany extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que permite eliminar un registro del sistema
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         //Nos da dal compañia de la fila selecionada
         Company comp_select = LogicaNegocio.getAllCompany().get(tblCompany.getSelectedRow());
@@ -170,6 +174,10 @@ public class FrmCompany extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAnadirActionPerformed
 
+    /**
+     * 
+     * Evento que permite editar un registro del sistema
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         
         //Nos da dal compañia de la fila selecionada
@@ -185,6 +193,10 @@ public class FrmCompany extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * 
+     * Evento que permite guardar los cambios en el .csv 
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         LogicaNegocio.escribirCompany(LogicaNegocio.getAllCompany());
@@ -201,6 +213,9 @@ public class FrmCompany extends javax.swing.JFrame {
     private javax.swing.JTextField txtError;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableCompany() {
         tblCompany.setModel(new CompanyModelTable(LogicaNegocio.getAllCompany()));
         

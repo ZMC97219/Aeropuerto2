@@ -28,8 +28,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 import java.text.ParseException;
-import static java.time.Instant.now;
-import java.time.LocalDate;
 
 /**
  * Clase donde se agrupan los metedos y funciones para dar soporte a la logistica del Aeropuerto
@@ -38,12 +36,13 @@ import java.time.LocalDate;
  */
 public class LogicaNegocio {
     
-    // Para inicializar con algunos municipios
+    /**
+     * Metodo para inicializar los datos de los .csv y de las clases 
+     */
     public static void initializesystem () {
         fillMunicipiosList();
         fillAeropuertosList();
         
-        //fillCompanyList();
         leerCompany();
         try {
             leerVueloBase();
@@ -62,12 +61,23 @@ public class LogicaNegocio {
 
     
     // <editor-fold defaultstate="collapsed" desc="Logica de Municipios"> 
+    
+    /**
+     * Se crea una lista que contiene todos los municipios
+     */
     private static List<Municipio> lstMunicipios = new ArrayList<>();
     
+    /**
+     * Lista que recorre los municipios
+     * @return devuelve una lista con todos los municipios
+     */
     public static List<Municipio> getAllMunicipios(){
         return lstMunicipios;
     }
     
+    /**
+     * Metodo para inicializar algunos municipios en memoria
+     */
     private static void fillMunicipiosList(){
         // Se añaden a la lista algunos municipios, se eligen del excel
         lstMunicipios.add(new Municipio("00000", "internacional"));
@@ -82,6 +92,9 @@ public class LogicaNegocio {
     
     // <editor-fold defaultstate="collapsed" desc="Logica de aeropuertos"> 
     
+    /**
+     * Metodo para inicializar algunos aeropuertos en memoria
+     */
     private static void fillAeropuertosList(){
         // Se añaden a la lista algunos municipios, se eligen del excel
         lstAeropuertos.add(new Aeropuerto ("OVD", "Aeropuerto de Asturias", "33014"));
@@ -94,10 +107,15 @@ public class LogicaNegocio {
 
     }
     
-    // lista de aeropuerto del sistema
+    /**
+     * Lista de aeropuerto del sistema
+     */
     private static List<Aeropuerto> lstAeropuertos = new ArrayList<>();
     
-    // Aeropuerto base del sistema
+
+    /**
+     * Aeropuerto base del sistema
+     */
     public static Aeropuerto aeropuertoBase = getAeropuertoByCodigoIATA ("OVD");
     
     /**
@@ -139,13 +157,18 @@ public class LogicaNegocio {
     
     // <editor-fold defaultstate="collapsed" desc="Logica de compañias"> 
      
+     /**
+     * Metodo para inicializar algunas compañias en memoria
+     */
     private static void fillCompanyList() {
         lstCompanys.add(new Company(75, "RB", "Iberia Líneas Aéreas de España", "Desconocida", "28079", "911234568", "911234567"));
         lstCompanys.add(new Company(125, "BA", "British Airways P.L.C.", "Desconocida", "00000", "981234568", "981234567"));
         lstCompanys.add(new Company(137, "VX", "Aerolíneas Centrales de Colombia", "Desconocida", "00000", "961234568", "961234568"));
 
     }
-    
+    /**
+     * metodo que se usa para leer las compañias de un .csv
+     */
     public static void leerCompany() {
         try {
             String l;
@@ -174,21 +197,12 @@ public class LogicaNegocio {
         }
     }
     
+    /**
+     * metodo que se usa para escribir las compañias de un .csv
+     */
     public static void escribirCompany(List<Company> comp) {
         try {
-            /*try {
-            FileWriter f = new FileWriter("src/main/resources/company.csv");
-            CSVWriter writer = new CSVWriter(f);
-            try {
-            writer.writeAll((ResultSet) comp, true);
-            } catch (Exception ex) {
-            Logger.getLogger(LogicaNegocio.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            writer.close();
-            
-            } catch (IOException ex) {
-            Logger.getLogger(LogicaNegocio.class.getName()).log(Level.SEVERE, null, ex);
-            }*/
+
             
             FileWriter f = new FileWriter("src/main/resources/company.csv");
             
@@ -218,7 +232,10 @@ public class LogicaNegocio {
         System.out.println("Se ha escrito el fichero company.csv");
         
     }
-    // lista de compañias del sistema
+
+    /**
+     * lista de compañias del sistema
+     */
     private static List<Company> lstCompanys = new ArrayList<>();
     
     
@@ -230,7 +247,11 @@ public class LogicaNegocio {
         return lstCompanys;
     }
     
-    
+    /**
+     * Se obtiene una compañia dado su nombre 
+     * @param nombre nombre de la compañia a obtener
+     * @return una compañia dado su nombre
+     */
     public static Company getCompanyaByNombre(String nombre) {
         Optional<Company> companyByNombre = lstCompanys.stream()
                 .filter(a -> a.getNombre().equals(nombre))
@@ -238,7 +259,11 @@ public class LogicaNegocio {
         return companyByNombre.isPresent() ? companyByNombre.get() : null;
     }
             
-    
+    /**
+     * Se obtiene una compañia dado su codigo 
+     * @param codigo codigo de la compañia a obtener
+     * @return una compañia dado su codigo
+     */
     public static Company getCompanyByCodigo (String codigo){
         
         Optional<Company> companyByCodigo = lstCompanys.stream()
@@ -248,6 +273,12 @@ public class LogicaNegocio {
         return companyByCodigo.isPresent() ? companyByCodigo.get(): null;
         
     }
+    
+    /**
+     * Se obtiene una compañia dado su prefijo
+     * @param prefijo de la compañia a obtener
+     * @return una compañia dado su prefijo
+     */
     
     public static Company getCompanyByPrefijo (int prefijo){
         
@@ -259,16 +290,29 @@ public class LogicaNegocio {
         
     }
     
+    /**
+     * Metodo que premite añadir compañias
+     * @param comp lista de compañia a añadir 
+     */
     public static void addCompany (Company comp){
         lstCompanys.add(comp);
     }
     
+    /**
+     * Metodo que premite borrar compañias
+     * @param prefijo borra compañia en funcion del prefijo de la compañia
+     */
     public static void deleteCompany (int prefijo){
         // Usamos el prefijo para borrar la compañia. Para esto buscamos la compañia que tenga el prefijo y a continuacion la borramos
         Company comp = getCompanyByPrefijo(prefijo);
         lstCompanys.remove(comp);
     }
     
+    /**
+     * Metodo que premite actualizar compañias
+     * @param oldcomp compañia antiagua a modifcar
+     * @param newcomp compañia modifica
+     */
     public static void updateCompany (Company oldcomp, Company newcomp){
         Company actual= getCompanyByPrefijo(oldcomp.getPrefijo());
         actual.setDireccion(newcomp.getDireccion());
@@ -282,11 +326,21 @@ public class LogicaNegocio {
     // </editor-fold> 
     
     // <editor-fold defaultstate="collapsed" desc="Vuelos Base"> 
+    
+    /**
+     * Metodo que devuelve la fecha en un formato HH:mm
+     * @param fecha fecha a convertir 
+     * @return Devuelve la hora en un formato HH:mm
+     */
     public static String getHoraFecha(Date fecha) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(fecha);
     }
     
+    /**
+     * Metodo que lee el .csv de los vuelos base
+     * @throws ParseException Excepcion en caso de que falle la conversion de fecha
+     */
     public static void leerVueloBase() throws ParseException {
         try {
             String l;
@@ -316,6 +370,9 @@ public class LogicaNegocio {
         }
     }
     
+    /**
+     * Metodo que escribe el .csv de los vuelos base
+     */
     public static void escribirVueloBase(List<VueloBase> Vuelo) {
         try {
             
@@ -348,14 +405,24 @@ public class LogicaNegocio {
         
     }
     
-    
+    /**
+     * Lista de los vuelos base del sistema
+     */
     private static List<VueloBase> lstVueloBase = new ArrayList<>();
     
+    /**
+     * Metodo que devuelve todos los vuelos base del sistema
+     * @return los vuelos base
+     */
     public static List<VueloBase> getAllVueloBase(){
         return lstVueloBase;
     }
             
-    
+    /**
+     * Se obtiene los vuelos base dado su codigo
+     * @param codigo codigo del vuelos base a obtener
+     * @return un vuelos base correspondiente al codigo 
+     */
     public static VueloBase getVueloBaseByCodigo (String codigo){
         
         Optional<VueloBase> vueloBaseByCodigo = lstVueloBase.stream()
@@ -366,17 +433,29 @@ public class LogicaNegocio {
         
     }
     
-    
+    /**
+     * Metodo que añade un vuelo del sistema
+     * @param VueloBase vuelo base a añadir a la lista
+     */
     public static void addVueloBase (VueloBase VueloBase){
         lstVueloBase.add(VueloBase);
     }
     
+    /**
+     * Metodo que elimina un vuelo del sistema
+     * @param codigoVuelo vuelo base a eliminar a la lista
+     */
     public static void deleteVueloBase (String codigoVuelo){
         // Usamos el prefijo para borrar la compañia. Para esto buscamos la compañia que tenga el prefijo y a continuacion la borramos
         VueloBase VueloBase = getVueloBaseByCodigo(codigoVuelo);
         lstVueloBase.remove(VueloBase);
     }
     
+    /**
+     * Metodo que actualiza un vuelo del sistema
+     * @param oldVueloBase vuelo base a actualizar
+     * @param newVueloBase vuelo base a actualizado
+     */
     public static void updateVueloBase (VueloBase oldVueloBase, VueloBase newVueloBase){
         VueloBase actual= getVueloBaseByCodigo(oldVueloBase.getCodigoVuelo());
         
@@ -395,7 +474,10 @@ public class LogicaNegocio {
     
     // <editor-fold defaultstate="collapsed" desc="Vuelos Diarios"> 
     
-    
+    /**
+     * Metodo que lee el .csv de Vuelo Dario
+     * @throws ParseException Caso de que no pueda leer el formato de fecha
+     */
     public static void leerVueloDario() throws ParseException {
         try {
             String l;
@@ -427,6 +509,9 @@ public class LogicaNegocio {
         }
     }
     
+    /**
+     * Metodo que escribe el .csv de Vuelo Dario
+     */
     public static void escribirVueloDario(List<VueloDiario> Vuelo) {
         try {
             
@@ -458,15 +543,24 @@ public class LogicaNegocio {
         
     }
     
-    
+    /**
+     * lista con los vuelos diarios 
+     */
     private static List<VueloDiario> lstVueloDiario = new ArrayList<>();
-    
-    // Obtiene toda la coleccion de vuelos diarios
+
+    /**
+     * Obtiene toda la coleccion de vuelos diarios
+     * @return devuelve todos los vuelos diarios
+     */
     public static List<VueloDiario> getAllVueloDiario(){
         return lstVueloDiario;
     }
             
-    
+    /**
+     * Se obtiene un vuelo diario dado su codigo
+     * @param codigo codigo del vuelo diario a obtener
+     * @return un vuelo diario correspondiente al codigo 
+     */
     public static VueloDiario getVueloDiarioByCodigo (String codigo){
         
         Optional<VueloDiario> vueloDiarioByCodigo = lstVueloDiario.stream()
@@ -476,17 +570,29 @@ public class LogicaNegocio {
         return vueloDiarioByCodigo.isPresent() ? vueloDiarioByCodigo.get(): null;
     }
     
-    
+    /**
+     * Metodo que añade un vuelo diario al sistema
+     * @param vueloDiario vuelo diarios a añadir al sistema
+     */
     public static void addVueloDiario (VueloDiario vueloDiario){
         lstVueloDiario.add(vueloDiario);
     }
     
+    /**
+     * Metodo que elimina un vuelo diario al sistema
+     * @param codigoVuelo vuelo diarios a eliminar del sistema
+     */
     public static void deleteVueloDiario (String codigoVuelo){
         // Usamos el prefijo para borrar la compañia. Para esto buscamos la compañia que tenga el prefijo y a continuacion la borramos
         VueloDiario VueloDiario = getVueloDiarioByCodigo(codigoVuelo);
         lstVueloDiario.remove(VueloDiario);
     }
     
+    /**
+     * Metodo que actualiza un vuelo diario al sistema
+     * @param oldVueloDiario vuelo diario a actualizar
+     * @param newVueloDiario vuelo diario a actualizado
+     */
     public static void updateVueloDiario (VueloDiario oldVueloDiario, VueloDiario newVueloDiario){
         VueloDiario actual= getVueloDiarioByCodigo(oldVueloDiario.getCodigoVueloBase());
         
@@ -506,10 +612,10 @@ public class LogicaNegocio {
     // <editor-fold defaultstate="collapsed" desc="Logica de REST"> 
 
     /**
-     *
-     * @param codMunicipio
-     * @return
-     * @throws UnirestException
+     * Metodo que realiza una peticion a la API para saber la temperatura maxima y minima de un municipio
+     * @param codMunicipio codigo de municipio a comprobar la temperatura
+     * @return el valor de la temperatura del minicipio en concreto
+     * @throws UnirestException caso que no pueda realizar la peticion a la API
      */
     public static Temperatura serviceSearch(String codMunicipio) throws UnirestException {
         Temperatura retValue = null;
@@ -547,8 +653,17 @@ public class LogicaNegocio {
     // </editor-fold> 
     
     // <editor-fold defaultstate="collapsed" desc="Logica de panel de vuelos por compañía">
+    /**
+     * Lista del panel de vuelos y compañias el sistema
+     */
     private static List<VueloDiario> lstPanelVuelosCompany = new ArrayList<>();
     
+    /**
+     * metodo que busca los vuelos y la compañias
+     * @param fecha_Buscar fecha a buscar con los vuelos y la compañia
+     * @param company_Buscar comapañia a buscar con los vuelos y la compañia
+     * @return una lista con los vuelos y la compañia
+     */
     public static List<VueloDiario> getVuelosCompany(Date fecha_Buscar, Company company_Buscar) {
         lstPanelVuelosCompany.clear();
 

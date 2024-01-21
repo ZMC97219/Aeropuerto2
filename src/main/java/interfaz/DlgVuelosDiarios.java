@@ -4,8 +4,7 @@
  */
 package interfaz;
 
-import datos.Aeropuerto;
-import datos.VueloBase;
+
 import datos.VueloDiario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,13 +13,12 @@ import java.util.logging.Logger;
 import logica.LogicaNegocio;
 
 /**
- *
+ * Interface a modificar y añadir vuelos diarios en el sistema
  * @author jrubioa
  */
 public class DlgVuelosDiarios extends javax.swing.JDialog {
 
     private VueloDiario vueloDiario;
-    private Aeropuerto aeropuerto;
     
     
     private boolean change = false;
@@ -33,39 +31,43 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
         return change;
     }
     
+    /**
+     * Metodo get de la vuelos diarios
+     * @return Devuelve los vuelos diarios
+     */
     public VueloDiario getVueloDiario() {
         return vueloDiario;
     }
 
+    /**
+     * Metodo set de la vuelos diarios
+     * @param vueloDiario asigna los vuelos diarios
+     */
     public void setVueloDiario(VueloDiario vueloDiario) {
         this.vueloDiario = vueloDiario;
     }
     /**
+     * Contructor
      * Creates new form DlgVuelosDiarios
      */
     public DlgVuelosDiarios(java.awt.Frame parent, boolean modal, VueloDiario vueloDiario) {
         super(parent, modal);
         initComponents();
-        btnGuardar.setEnabled(false);
         
         this.vueloDiario = vueloDiario;
         
-        LogicaNegocio.getAllAeropuertos().forEach(m->this.cbCodigoVueloBase.addItem(m));
+        setControlState(true);
+        btnGuardar.setEnabled(true);
+        
+        //LogicaNegocio.getAllAeropuertos().forEach(m->this.cbCodigoVueloBase.addItem(m));
+        
+        this.txtCodigoBase.setText(this.vueloDiario.getCodigoVueloBase());
         this.txtFechaVuelo.setText(sdF.format(this.vueloDiario.getFechaVuelo()));
         this.txtHoraSalidaReal.setText(sdH.format(this.vueloDiario.getHoraSalidaReal()));
         this.txtHoraLegadaReal.setText(sdH.format(this.vueloDiario.getHoraLegadaReal()));
         this.txtNumeroPlazas.setText(String.valueOf(this.vueloDiario.getNumeroPlazas()));
         this.txtPrecio.setText(String.valueOf(this.vueloDiario.getPrecio()));
-        
-        // Caso de que se añada una nueva compañia
-        if(vueloDiario == null || vueloDiario.getCodigoVueloBase().isBlank()){
-            btnGuardar.setEnabled(false);
-            setControlState(false);
-            
-        }else{
-            btnGuardar.setEnabled(true);
-            setControlState(true);
-        }
+      
 
     }
 
@@ -91,7 +93,7 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
         txtHoraSalidaReal = new javax.swing.JTextField();
         txtNumeroPlazas = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
-        cbCodigoVueloBase = new javax.swing.JComboBox<>();
+        txtCodigoBase = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -147,8 +149,8 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
                     .addComponent(txtHoraLegadaReal, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                     .addComponent(txtHoraSalidaReal, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                     .addComponent(btnSalir, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbCodigoVueloBase, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(97, Short.MAX_VALUE))
+                    .addComponent(txtCodigoBase, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +158,7 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cbCodigoVueloBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigoBase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -187,11 +189,17 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que guarda los datos  de este formularios
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         this.validate();
-        this.isvalid=true;
+        //this.isvalid=true;
         if(isvalid){
+            setControlState(true);
+            btnGuardar.setEnabled(true);
             try {
                 this.change = true;
 
@@ -199,9 +207,8 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
                     this.vueloDiario = new VueloDiario();
                 }
                 
-                VueloDiario m = (VueloDiario)cbCodigoVueloBase.getSelectedItem();
-                this.vueloDiario.setCodigoVueloBase(m.getCodigoVueloBase());
-
+                
+                this.vueloDiario.setCodigoVueloBase(txtCodigoBase.getText());
                 this.vueloDiario.setFechaVuelo(sdF.parse(txtFechaVuelo.getText()));
                 this.vueloDiario.setHoraSalidaReal(sdH.parse(txtHoraSalidaReal.getText()));
                 this.vueloDiario.setHoraLegadaReal(sdH.parse(txtHoraLegadaReal.getText()));
@@ -220,6 +227,10 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    /**
+     * 
+     * Evento que sale de este formularios sin realizar cambios
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.setVisible(false);
         this.change = false;
@@ -230,13 +241,13 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<Aeropuerto> cbCodigoVueloBase;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField txtCodigoBase;
     private javax.swing.JTextField txtFechaVuelo;
     private javax.swing.JTextField txtHoraLegadaReal;
     private javax.swing.JTextField txtHoraSalidaReal;
@@ -245,19 +256,36 @@ public class DlgVuelosDiarios extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     
-    // Metodo que se usa para desabilitar o habilitar controles
+    /**
+     * Metodo que se usa para desabilitar o habilitar controles
+     * @param state puede ser true o false en funcion si se quiere habilitar o no
+     */
     private void setControlState(boolean state) {
-        this.cbCodigoVueloBase.setEditable(state);
+        this.txtCodigoBase.setEditable(state);
         this.txtFechaVuelo.setEditable(state);
         this.txtHoraSalidaReal.setEditable(state);
         this.txtHoraLegadaReal.setEditable(state);
         this.txtNumeroPlazas.setEditable(state);
         this.txtPrecio.setEditable(state);
         
+        
     }
     
-public void validate(){
+    /**
+     * Metodo que realiza la validacion antes de guardar los cambios
+     */
+    public void validate(){
         super.validate();
+        
+        String codigo = txtCodigoBase.getText();
+        
+        
+        if(LogicaNegocio.getVueloDiarioByCodigo(codigo)!= null){
+             isvalid=false;
+            
+        }else{
+            isvalid=true;
+        }
     }
 
 }

@@ -21,8 +21,8 @@ import logica.LogicaNegocio;
 import logica.VuelosBaseModelTable;
 
 /**
- *
- * @author usuario
+ * Formulario donde se muestran los datos de los vuelos base del sistema
+ * @author jrubioa
  */
 public class FrmVuelosBase extends javax.swing.JFrame {
 
@@ -163,6 +163,10 @@ public class FrmVuelosBase extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que permite editar un registro del sistema
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         //Nos da dal compañia de la fila selecionada
@@ -178,6 +182,10 @@ public class FrmVuelosBase extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * 
+     * Evento que permite añadir un registro del sistema
+     */
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         SimpleDateFormat sdH = new SimpleDateFormat("hh:mm");
         
@@ -207,6 +215,10 @@ public class FrmVuelosBase extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnAnadirActionPerformed
 
+    /**
+     * 
+     * Evento que permite eliminar un registro del sistema
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         //Nos da dal compañia de la fila selecionada
         VueloBase comp_select = LogicaNegocio.getAllVueloBase().get(tblVuelosBase.getSelectedRow());
@@ -219,17 +231,28 @@ public class FrmVuelosBase extends javax.swing.JFrame {
         fillTableVuelosBase();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * 
+     * Evento que permite guardar los cambios en el .csv 
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         LogicaNegocio.escribirVueloBase(LogicaNegocio.getAllVueloBase());
     }//GEN-LAST:event_formWindowClosing
 
+    /**
+     * Permite abrir el menu de ayuda
+     */
     private void mmuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmuAyudaActionPerformed
         //Se llama al metodo de abajo con la URL a mostrar
         openWebView("https://educastur-1.gitbook.io/gestion-de-vuelos-base/");
     }//GEN-LAST:event_mmuAyudaActionPerformed
 
-// Basicamente esto es para que carge la pagina URL
+
+    /**
+     * Metodo que permite abrir la URL de ayuda
+     * @param url que se abre en el menu de ayuda
+     */
     private void openWebView(String url) { 
             Platform.runLater(() -> { 
             WebView webView = new WebView(); 
@@ -251,6 +274,9 @@ public class FrmVuelosBase extends javax.swing.JFrame {
     private javax.swing.JTable tblVuelosBase;
     // End of variables declaration//GEN-END:variables
  
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableVuelosBase() {
         tblVuelosBase.setModel(new VuelosBaseModelTable(LogicaNegocio.getAllVueloBase()));
         

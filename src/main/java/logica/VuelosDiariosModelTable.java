@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
- *
+ * Clase destinada a la rellenar los datos de los vuelos diarios
  * @author jrubioa
  */
 public class VuelosDiariosModelTable extends AbstractTableModel{
@@ -21,6 +21,10 @@ public class VuelosDiariosModelTable extends AbstractTableModel{
     private ArrayList<String> columnNames; // nombre de las columnas
     private ArrayList<Class> columnClasses; // Clases de las columnas
     
+    /**
+     * contructor para rellenar el Table Model 
+     * @param listaVueloDiario lista con los datos de los vuelos diarios
+     */
     public VuelosDiariosModelTable(List<VueloDiario> listaVueloDiario) {
         this.listaVueloDiario = listaVueloDiario;
         columnNames = new ArrayList<>();
@@ -41,18 +45,31 @@ public class VuelosDiariosModelTable extends AbstractTableModel{
     }
     
     
-    
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de filas
+     */
     @Override
     public int getRowCount() {
         //return 6;
         return this.listaVueloDiario.size();
     }
 
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de columnas
+     */
     @Override
     public int getColumnCount() {
         return this.listaVueloDiario.size();
     }
 
+    /**
+     * Metodo que rellena la tabla
+     * @param rowIndex correspnde a la fila
+     * @param columnIndex correspnde a la columnna
+     * @return el valor de la tabla
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
 
@@ -82,10 +99,20 @@ public class VuelosDiariosModelTable extends AbstractTableModel{
         }
     }
         
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el tipo de comunna a rellenar
+     */
     @Override
     public Class getColumnClass(int col) {
         return this.columnClasses.get(col);
     }
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el nombre de la comunna a rellenar
+     */
     @Override
     public String getColumnName(int col) {
         return this.columnNames.get(col);

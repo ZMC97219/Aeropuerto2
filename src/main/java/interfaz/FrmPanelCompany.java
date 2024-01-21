@@ -15,7 +15,7 @@ import logica.CompanyVuelosModelTable;
 import logica.LogicaNegocio;
 
 /**
- *
+ * Formulario donde se muestran los datos en el panel de compañias
  * @author jrubioa
  */
 public class FrmPanelCompany extends javax.swing.JFrame {
@@ -133,12 +133,18 @@ public class FrmPanelCompany extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+    * 
+    * Evento que buscar en el sistema
+    */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         fillTableCompany1();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     public void fillTableCompany1() {              
         try {
             Date fecha_Buscar = sdH.parse(txtFecha.getText());
@@ -169,6 +175,9 @@ public class FrmPanelCompany extends javax.swing.JFrame {
     private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableCompany() {
         tblPanelCompany.setModel(new CompanyModelTable(LogicaNegocio.getAllCompany()));
         

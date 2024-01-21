@@ -7,8 +7,9 @@ package interfaz;
 import datos.Company;
 import datos.Municipio;
 import logica.LogicaNegocio;
+
 /**
- *
+ * Interface a modificar y añadir compañias en el sistema
  * @author jrubioa
  */
 public class DlgDatosCompany extends javax.swing.JDialog {
@@ -21,6 +22,7 @@ public class DlgDatosCompany extends javax.swing.JDialog {
         return change;
     }
     /**
+     * Contructor
      * Creates new form DlgDatosCompany
      */
     public DlgDatosCompany(java.awt.Frame parent, boolean modal, Company company ) {
@@ -192,11 +194,17 @@ public class DlgDatosCompany extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento que sale de este formularios sin realizar cambios
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.setVisible(false);
         this.change = false;
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    /**
+     * Evento que guarda los datos  de este formularios
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         
         this.validate();
@@ -224,11 +232,18 @@ public class DlgDatosCompany extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    
+    /**
+     * Metodo get de la compañia
+     * @return Devuelve la compañia
+     */
     public Company getCompany() {
         return company;
     }
 
+    /**
+     * Metodo set de la compañia
+     * @param company asigna la compañia
+     */
     public void setCompany(Company company) {
         this.company = company;
     }
@@ -254,7 +269,10 @@ public class DlgDatosCompany extends javax.swing.JDialog {
     private javax.swing.JTextField txtTelUsuario;
     // End of variables declaration//GEN-END:variables
 
-    // Metodo que se usa para desabilitar o habilitar controles
+    /**
+     * Metodo que se usa para desabilitar o habilitar controles
+     * @param state puede ser true o false en funcion si se quiere habilitar o no
+     */
     private void setControlState(boolean state) {
         this.txtCodigo.setEditable(state);
         this.txtPrefijo.setEditable(state);
@@ -266,6 +284,9 @@ public class DlgDatosCompany extends javax.swing.JDialog {
         
     }
     
+    /**
+     * Metodo que realiza la validacion antes de guardar los cambios
+     */
     public void validate(){
         
         super.validate();

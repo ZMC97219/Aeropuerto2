@@ -5,7 +5,6 @@
 package interfaz;
 
 import datos.VueloDiario;
-import static interfaz.FrmPanelLlegadas.getSalidasByDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import logica.LogicaNegocio;
 import logica.VuelosDiariosModelTable;
 
 /**
- *
+ * Formulario donde se muestran los datos del panel de Salidas del sistema
  * @author jrubioa
  */
 public class FrmPanelSalida extends javax.swing.JFrame {
@@ -111,6 +110,10 @@ public class FrmPanelSalida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que permite buscar en el sistema
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
         fillTableVuelosDiarios1();
@@ -118,17 +121,25 @@ public class FrmPanelSalida extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-private static List<VueloDiario> lstPanelSalida = new ArrayList<>();
+    /**
+     * Lista con las salidas del sistema
+     */
+    private static List<VueloDiario> lstPanelSalida = new ArrayList<>();
     
-public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
-    lstPanelSalida.clear();
-    for (VueloDiario vuelo : LogicaNegocio.getAllVueloDiario()) {
-        if ((vuelo.getFechaVuelo().equals(fecha_Buscar))) {
-             lstPanelSalida.add(vuelo);
+    /**
+         * Se obtiene los vuelos diarios dado su fecha
+         * @param fecha_Buscar fecha a buscar
+        * @return devuelve el vuelo diario a partir de la fecha
+        */
+    public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
+        lstPanelSalida.clear();
+        for (VueloDiario vuelo : LogicaNegocio.getAllVueloDiario()) {
+            if ((vuelo.getFechaVuelo().equals(fecha_Buscar))) {
+                lstPanelSalida.add(vuelo);
+            }
         }
-    }
-        return lstPanelSalida;
-    }
+            return lstPanelSalida;
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -139,7 +150,9 @@ public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
     private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 
-
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableVuelosDiarios1() {
         try {
             txtError.setText("");
@@ -159,6 +172,9 @@ public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
         
     }
     
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableVuelosDiarios() {
         tblPanelSalidas.setModel(new VuelosDiariosModelTable(LogicaNegocio.getAllVueloDiario()));
         

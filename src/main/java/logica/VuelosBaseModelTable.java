@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
- *
+ * Clase destinada a la rellenar los datos de los vuelos base
  * @author jrubioa
  */
 public class VuelosBaseModelTable extends AbstractTableModel{
@@ -21,6 +21,10 @@ public class VuelosBaseModelTable extends AbstractTableModel{
     private List<String> columnNames;
     private List<Class> columnClasses;
     
+    /**
+     * contructor para rellenar el Table Model 
+     * @param listaVueloBase lista con los datos de los vuelos base
+     */
     public VuelosBaseModelTable(List<VueloBase> listaVueloBase) {
         
         this.listaVueloBase = listaVueloBase;
@@ -48,17 +52,32 @@ public class VuelosBaseModelTable extends AbstractTableModel{
         
         
     }
+    
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de filas
+     */
     @Override
     public int getRowCount() {
         return listaVueloBase.size();
         
     }
 
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de columnas
+     */
     @Override
     public int getColumnCount() {
        return columnNames.size();
     }
 
+    /**
+     * Metodo que rellena la tabla
+     * @param rowIndex correspnde a la fila
+     * @param columnIndex correspnde a la columnna
+     * @return el valor de la tabla
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         VueloBase VuelosBase = this.listaVueloBase.get(rowIndex);
@@ -87,10 +106,20 @@ public class VuelosBaseModelTable extends AbstractTableModel{
         
     }
     
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el tipo de comunna a rellenar
+     */
     @Override
     public Class getColumnClass(int col) {
         return this.columnClasses.get(col);
     }
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el nombre de la comunna a rellenar
+     */
     @Override
     public String getColumnName(int col) {
         return this.columnNames.get(col);

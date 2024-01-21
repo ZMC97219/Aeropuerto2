@@ -12,7 +12,7 @@ import javax.swing.table.AbstractTableModel;
 import static logica.LogicaNegocio.getCompanyByCodigo;
 
 /**
- *
+ *Clase destinada a la rellenar los datos del panel de la compañia y Vuelos
  * @author jrubioa
  */
 public class CompanyVuelosModelTable extends AbstractTableModel {
@@ -21,6 +21,10 @@ public class CompanyVuelosModelTable extends AbstractTableModel {
     private List<String> columnNames;
     private List<Class> columnClasses;
     
+    /**
+     * contructor para rellenar el Table Model 
+     * @param lstVuelosCompany lista con los datos de los vuelos y compañias
+     */
     public CompanyVuelosModelTable(List<VueloDiario> lstVuelosCompany) {
         
         this.lstVuelosCompany = lstVuelosCompany;
@@ -42,17 +46,30 @@ public class CompanyVuelosModelTable extends AbstractTableModel {
         
     }
     
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de filas
+     */
     @Override
     public int getRowCount() {
         return this.lstVuelosCompany.size();
     }
 
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de columnas
+     */
     @Override
     public int getColumnCount() {
         return this.columnNames.size();
     }
     
-    
+    /**
+     * Metodo que rellena la tabla
+     * @param rowIndex correspnde a la fila
+     * @param columnIndex correspnde a la columnna
+     * @return el valor de la tabla
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         VueloDiario vueloDiario = this.lstVuelosCompany.get(rowIndex);
@@ -81,12 +98,21 @@ public class CompanyVuelosModelTable extends AbstractTableModel {
     }
     
     
-    
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el tipo de comunna a rellenar
+     */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         return this.columnClasses.get(columnIndex);
     }
 
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el nombre de la comunna a rellenar
+     */
     @Override
     public String getColumnName(int column) {
         return this.columnNames.get(column);

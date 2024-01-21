@@ -18,7 +18,7 @@ import javax.swing.JFrame;
 import logica.LogicaNegocio;
 
 /**
- *
+ * Formulario donde se muestran los accesos a los paneles y la temperatura del sistema
  * @author jrubioa
  */
 public class FrmRestTemp extends javax.swing.JFrame {
@@ -187,6 +187,10 @@ public class FrmRestTemp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que permite buscar la temperatura minima y maxima de un municipio
+     */
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
 
             
@@ -208,11 +212,19 @@ public class FrmRestTemp extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    /**
+     * 
+     * Evento que permite abrir el menu de ayuda del sistema
+     */
     private void mmuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmuAyudaActionPerformed
         //Se llama al metodo de abajo con la URL a mostrar
         openWebView("https://educastur-1.gitbook.io/llamada-a-la-api-servicios-rest-de-la-aemet/");
     }//GEN-LAST:event_mmuAyudaActionPerformed
 
+    /**
+     * 
+     * Evento que permite abrir el panel de salida de vuelos 
+     */
     private void btnPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPanelActionPerformed
         // TODO add your handling code here:
         FrmPanelSalida temp = new FrmPanelSalida();
@@ -221,19 +233,30 @@ public class FrmRestTemp extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnPanelActionPerformed
 
+    /**
+     * 
+     * Evento que permite abrir el panel de compañias 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         FrmPanelCompany temp = new FrmPanelCompany();
         temp.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     * 
+     * Evento que permite abrir el panel de llegadas de vuelos 
+     */
     private void btnPanel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPanel1ActionPerformed
         // TODO add your handling code here:
         FrmPanelLlegadas temp = new FrmPanelLlegadas();
         temp.setVisible(true);
     }//GEN-LAST:event_btnPanel1ActionPerformed
 
-    // Basicamente esto es para que carge la pagina URL
+    /**
+     * Metodo que permite abrir la URL de ayuda
+     * @param url que se abre en el menu de ayuda
+     */
     private void openWebView(String url) { 
             Platform.runLater(() -> { 
             WebView webView = new WebView(); 

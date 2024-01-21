@@ -7,12 +7,16 @@ package datos;
 
 
 /**
- *
+ * Clase para la gestion de los municipios
  * @author jrubioa
  */
 public record Municipio(String codigo,String nombre ) {
     
-    //Se realiza el siguiente metodo para que en el combo solo muestre el nombre del municipio
+    
+    /**
+     * Se realiza con el objetivo de que el combo solo muestre el nombre del municipio
+     * @return devuelve el nombre del Municipio
+     */
     public String toString() {
         return nombre;
     }

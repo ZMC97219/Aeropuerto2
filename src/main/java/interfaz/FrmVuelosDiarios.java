@@ -5,14 +5,17 @@
 package interfaz;
 
 import datos.VueloDiario;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import logica.LogicaNegocio;
-import logica.VuelosBaseModelTable;
 import logica.VuelosDiariosModelTable;
 
 /**
- *
- * @author usuario
+ * Formulario donde se muestran los datos de los vuelos diarios del sistema
+ * @author jrubioa
  */
 public class FrmVuelosDiarios extends javax.swing.JFrame {
 
@@ -115,18 +118,16 @@ public class FrmVuelosDiarios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
                         .addComponent(btnEditar)
                         .addGap(45, 45, 45)
                         .addComponent(btnAnadir)
                         .addGap(62, 62, 62)
-                        .addComponent(btnEliminar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 759, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addComponent(btnEliminar)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,6 +145,9 @@ public class FrmVuelosDiarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Evento que permite editar un registro del sistema
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         VueloDiario comp_select = LogicaNegocio.getAllVueloDiario().get(tblVuelosDarios.getSelectedRow());
@@ -158,8 +162,29 @@ public class FrmVuelosDiarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * 
+     * Evento que permite añadir un registro del sistema
+     */
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
-        DlgVuelosDiarios dlgDatosVueloDiario = new DlgVuelosDiarios(this, true, null);
+        SimpleDateFormat sdH = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat sdF = new SimpleDateFormat("dd/MM/yyyy");
+        
+        VueloDiario comp_select = new VueloDiario();
+        
+        comp_select.setCodigoVueloBase("IB480");
+        try {
+            comp_select.setFechaVuelo(sdF.parse("00/00/0000"));
+            comp_select.setHoraSalidaReal(sdH.parse("00:00"));
+            comp_select.setHoraLegadaReal(sdH.parse("00:00"));
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmVuelosDiarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        comp_select.setNumeroPlazas(0);
+        comp_select.setPrecio((float) 0.00);
+
+        
+        DlgVuelosDiarios dlgDatosVueloDiario = new DlgVuelosDiarios(this, true, comp_select);
         dlgDatosVueloDiario.setVisible(true);
 
         if (dlgDatosVueloDiario.isChange()){
@@ -168,6 +193,10 @@ public class FrmVuelosDiarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAnadirActionPerformed
 
+    /**
+     * 
+     * Evento que permite eliminar un registro del sistema
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         //Nos da dal compañia de la fila selecionada
         VueloDiario comp_select = LogicaNegocio.getAllVueloDiario().get(tblVuelosDarios.getSelectedRow());
@@ -180,6 +209,10 @@ public class FrmVuelosDiarios extends javax.swing.JFrame {
         fillTableVuelosDiarios();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * 
+     * Evento que permite guardar los cambios en el .csv 
+     */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         LogicaNegocio.escribirVueloDario(LogicaNegocio.getAllVueloDiario());
@@ -196,6 +229,9 @@ public class FrmVuelosDiarios extends javax.swing.JFrame {
     private javax.swing.JTable tblVuelosDarios;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo que permite tener actualizada la tabla con los datos del sistema
+     */
     private void fillTableVuelosDiarios() {
         tblVuelosDarios.setModel(new VuelosDiariosModelTable(LogicaNegocio.getAllVueloDiario()));
         

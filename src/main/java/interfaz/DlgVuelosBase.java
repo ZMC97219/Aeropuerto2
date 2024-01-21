@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import logica.LogicaNegocio;
 
 /**
- *
+ * Interface a modificar y añadir vuelos Base en el sistema
  * @author jrubioa
  */
 public class DlgVuelosBase extends javax.swing.JDialog {
@@ -35,14 +35,23 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         return change;
     }
     
+    /**
+     * Metodo get de vuelos Base
+     * @return Devuelve un vuelos Base
+     */
     public VueloBase getVueloBase() {
         return vueloBase;
     }
 
+    /**
+     * Metodo set de vuelos Base
+     * @param vueloBase asigna un vuelos Base
+     */
     public void setVueloBase(VueloBase vueloBase) {
         this.vueloBase = vueloBase;
     }
     /**
+     * Contructor
      * Creates new form DlgVuelosBase
      */
     public DlgVuelosBase(java.awt.Frame parent, boolean modal, VueloBase vueloBase) {
@@ -82,10 +91,10 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         
     }
     
-    public static String getHoraFecha(Date fecha) {
+    /*public static String getHoraFecha(Date fecha) {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
         return sdf.format(fecha);
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -224,6 +233,10 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que guarda los datos  de este formularios
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
 
         this.validate();
@@ -266,6 +279,10 @@ public class DlgVuelosBase extends javax.swing.JDialog {
         //this.setVisible(false);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    /**
+     * 
+     * Evento que sale de este formularios sin realizar cambios
+     */
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.setVisible(false);
         this.change = false;
@@ -294,7 +311,11 @@ public class DlgVuelosBase extends javax.swing.JDialog {
     private javax.swing.JTextField txtNumerPlazas;
     // End of variables declaration//GEN-END:variables
 
-public void setControlState(boolean enabled) {
+     /**
+     * Metodo que se usa para desabilitar o habilitar controles
+     * @param enabled puede ser true o false en funcion si se quiere habilitar o no
+     */
+    public void setControlState(boolean enabled) {
         this.txtCodigoVuelo.setEnabled(enabled);
         //this.cbCodigoIataDestino.setEnabled(enabled);
         //this.cbCodigoIataOrigen.setEnabled(enabled);
@@ -304,6 +325,9 @@ public void setControlState(boolean enabled) {
         this.txtDiasSemanaVuelo.setEnabled(enabled);
     }
 
+    /**
+     * Metodo que realiza la validacion antes de guardar los cambios
+     */
     @Override
     public void validate() {
         super.validate();

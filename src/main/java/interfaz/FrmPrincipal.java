@@ -13,7 +13,7 @@ import javafx.scene.web.WebView;
 import javax.swing.JFrame;
 
 /**
- *
+ *  Interface principal donde puedes gestionar tanto compañias, vuelos base diarios y acceder a los paneles o a la gestion de temperaturas
  * @author jrubioa
  */
 public class FrmPrincipal extends javax.swing.JFrame {
@@ -107,36 +107,59 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * 
+     * Evento que permite abrir la gestion de campañas del sistema
+     */
     private void brnCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnCompanyActionPerformed
         //new FrmCompany().setVisible(true);
         FrmCompany.getInstance().setVisible(true);
         
     }//GEN-LAST:event_brnCompanyActionPerformed
 
+    /**
+     * 
+     * Evento que permite abrir la gestion de paneles o temperatura del sistema
+     */
     private void brnPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnPanelActionPerformed
 
         FrmRestTemp temp = new FrmRestTemp();
         temp.setVisible(true);
     }//GEN-LAST:event_brnPanelActionPerformed
 
+    /**
+     * 
+     * Evento que permite abrir la gestion de vuelos base del sistema
+     */
     private void brnVuelosBaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnVuelosBaseActionPerformed
         // TODO add your handling code here:
         FrmVuelosBase vuelos = new FrmVuelosBase();
         vuelos.setVisible(true);
     }//GEN-LAST:event_brnVuelosBaseActionPerformed
 
+    /**
+     * Permite abrir el menu de ayuda
+     */
     private void mmuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmuAyudaActionPerformed
         //Se llama al metodo de abajo con la URL a mostrar
         openWebView("https://educastur-1.gitbook.io/untitled-1/");
     }//GEN-LAST:event_mmuAyudaActionPerformed
 
+
+    /**
+     * 
+     * Evento que permite abrir la gestion de vuelos diarios del sistema
+     */
     private void brnVuelosDiariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnVuelosDiariosActionPerformed
         // TODO add your handling code here:
         FrmVuelosDiarios vuelos = new FrmVuelosDiarios();
         vuelos.setVisible(true);
     }//GEN-LAST:event_brnVuelosDiariosActionPerformed
 
-    // Basicamente esto es para que carge la pagina URL
+    /**
+     * Metodo que permite abrir la URL de ayuda
+     * @param url que se abre en el menu de ayuda
+     */
     private void openWebView(String url) { 
             Platform.runLater(() -> { 
             WebView webView = new WebView(); 

@@ -10,7 +10,7 @@ import datos.Company;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase destinada a la rellenar los datos de las compañias
  * @author jrubioa
  */
 public class CompanyModelTable extends AbstractTableModel{
@@ -19,6 +19,10 @@ public class CompanyModelTable extends AbstractTableModel{
     private ArrayList<String> columnNames; // nombre de las columnas
     private ArrayList<Class> columnClasses; // Clases de las columnas
 
+    /**
+     * contructor para rellenar el Table Model 
+     * @param listacompany lista con los datos de las compañias
+     */
     public CompanyModelTable(List<Company> listacompany) {
         this.listacompany = listacompany;
         columnNames = new ArrayList<>();
@@ -37,16 +41,30 @@ public class CompanyModelTable extends AbstractTableModel{
     
     
 
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de filas
+     */
     @Override
     public int getRowCount() {
         return listacompany.size();
     }
 
+    /**
+     * Metodo con el numero de filas
+     * @return devuelve el tamaño de columnas
+     */
     @Override
     public int getColumnCount() {
         return this.columnNames.size();
     }
 
+    /**
+     * Metodo que rellena la tabla
+     * @param rowIndex correspnde a la fila
+     * @param columnIndex correspnde a la columnna
+     * @return el valor de la tabla
+     */
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Company comp = this.listacompany.get(rowIndex);
@@ -65,10 +83,20 @@ public class CompanyModelTable extends AbstractTableModel{
          
     }
     
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el tipo de comunna a rellenar
+     */
     @Override
     public Class getColumnClass(int col) {
         return this.columnClasses.get(col);
     }
+    /**
+     * 
+     * @param col columnna
+     * @return devuelve el nombre de la comunna a rellenar
+     */
     @Override
     public String getColumnName(int col) {
         return this.columnNames.get(col);
