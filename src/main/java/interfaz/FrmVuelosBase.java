@@ -6,6 +6,10 @@ package interfaz;
 
 import datos.VueloBase;
 import java.awt.Dimension;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -165,7 +169,7 @@ public class FrmVuelosBase extends javax.swing.JFrame {
         VueloBase comp_select = LogicaNegocio.getAllVueloBase().get(tblVuelosBase.getSelectedRow());
 
         DlgVuelosBase dlgDatosVuelosBase = new DlgVuelosBase(this, true, comp_select);
-        dlgDatosVuelosBase.setVueloBase(comp_select);
+        //dlgDatosVuelosBase.setVueloBase(comp_select);
         dlgDatosVuelosBase.setVisible(true);
 
         if (dlgDatosVuelosBase.isChange()){
@@ -175,7 +179,23 @@ public class FrmVuelosBase extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
-        DlgVuelosBase dlgDatosVuelosBase = new DlgVuelosBase(this, true, null);
+        SimpleDateFormat sdH = new SimpleDateFormat("hh:mm");
+        
+        VueloBase comp_select = new VueloBase();
+        comp_select.setCodigoVuelo("");
+        comp_select.setCodigoIATAOrigen("OVD");
+        comp_select.setCodigoIATADestino("OVD");
+        comp_select.setNumeroPlazas(0);
+        try {
+            comp_select.setHoraSalida(sdH.parse("00:00"));
+            comp_select.setHoraLlegada(sdH.parse("00:00"));
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmVuelosBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        comp_select.setDiasSemanaVuelo("");
+        
+        
+        DlgVuelosBase dlgDatosVuelosBase = new DlgVuelosBase(this, true, comp_select);
         dlgDatosVuelosBase.setVisible(true);
         // Solamente si se ha cambiado se actualiza y se añade la compañia
         if (dlgDatosVuelosBase.isChange()){
@@ -206,7 +226,7 @@ public class FrmVuelosBase extends javax.swing.JFrame {
 
     private void mmuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmuAyudaActionPerformed
         //Se llama al metodo de abajo con la URL a mostrar
-        openWebView("https://es.wikipedia.org/wiki/Anexo:Aeropuertos_seg%C3%BAn_el_c%C3%B3digo_IATA");
+        openWebView("https://educastur-1.gitbook.io/gestion-de-vuelos-base/");
     }//GEN-LAST:event_mmuAyudaActionPerformed
 
 // Basicamente esto es para que carge la pagina URL

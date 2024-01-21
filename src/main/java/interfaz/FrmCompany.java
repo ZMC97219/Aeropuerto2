@@ -50,6 +50,7 @@ public class FrmCompany extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnAnadir = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        txtError = new javax.swing.JTextField();
 
         setTitle("Compañias del Aeropuerto");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -98,7 +99,7 @@ public class FrmCompany extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
+                .addGap(97, 97, 97)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnEditar)
@@ -106,8 +107,9 @@ public class FrmCompany extends javax.swing.JFrame {
                         .addComponent(btnAnadir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEliminar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtError, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +121,9 @@ public class FrmCompany extends javax.swing.JFrame {
                     .addComponent(btnEditar)
                     .addComponent(btnAnadir)
                     .addComponent(btnEliminar))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -153,10 +157,15 @@ public class FrmCompany extends javax.swing.JFrame {
         dlgDatosCompany.setVisible(true);
         // Solamente si se ha cambiado se actualiza y se añade la compañia
         if (dlgDatosCompany.isChange()){
+            txtError.setText("");
+            txtError.setEnabled(false);
             // Se añade la nueva compañia
             LogicaNegocio.addCompany(dlgDatosCompany.getCompany());
             // Se actualiza la tabla de la interface
             this.fillTableCompany();
+        }else{
+            txtError.setEnabled(true);
+            txtError.setText("Inserta una compañia correcta. Ya existe un Prefijo o un codigo con valor. Gracias");
         }
         
     }//GEN-LAST:event_btnAnadirActionPerformed
@@ -189,6 +198,7 @@ public class FrmCompany extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCompany;
+    private javax.swing.JTextField txtError;
     // End of variables declaration//GEN-END:variables
 
     private void fillTableCompany() {

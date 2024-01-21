@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import logica.LogicaNegocio;
-import static logica.LogicaNegocio.aeropuertoBase;
 
 /**
  *

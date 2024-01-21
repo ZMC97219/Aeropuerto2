@@ -92,6 +92,11 @@ public class FrmRestTemp extends javax.swing.JFrame {
         });
 
         btnPanel1.setText("PANEL DE LLEGADAS");
+        btnPanel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPanel1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("PANEL DE COMPAÑIAS");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -221,6 +226,12 @@ public class FrmRestTemp extends javax.swing.JFrame {
         FrmPanelCompany temp = new FrmPanelCompany();
         temp.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnPanel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPanel1ActionPerformed
+        // TODO add your handling code here:
+        FrmPanelLlegadas temp = new FrmPanelLlegadas();
+        temp.setVisible(true);
+    }//GEN-LAST:event_btnPanel1ActionPerformed
 
     // Basicamente esto es para que carge la pagina URL
     private void openWebView(String url) { 

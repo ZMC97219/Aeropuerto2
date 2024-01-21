@@ -13,6 +13,10 @@ public class Aeropuerto {
     private String nombre;
     private String codigoMunicipio;
 
+    public Aeropuerto(){
+        
+    }
+    
     public Aeropuerto(String codigoIATA, String nombre, String codigoMunicipio) {
         this.codigoIATA = codigoIATA;
         this.nombre = nombre;

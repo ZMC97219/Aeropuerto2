@@ -127,7 +127,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void mmuAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mmuAyudaActionPerformed
         //Se llama al metodo de abajo con la URL a mostrar
-        openWebView("https://educastur-1.gitbook.io/untitled/");
+        openWebView("https://educastur-1.gitbook.io/untitled-1/");
     }//GEN-LAST:event_mmuAyudaActionPerformed
 
     private void brnVuelosDiariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnVuelosDiariosActionPerformed

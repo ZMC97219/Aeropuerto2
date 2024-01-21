@@ -4,8 +4,8 @@
  */
 package interfaz;
 
+
 import datos.VueloDiario;
-import static interfaz.FrmPanelLlegadas.getSalidasByDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,21 +19,19 @@ import logica.VuelosDiariosModelTable;
  *
  * @author jrubioa
  */
-public class FrmPanelSalida extends javax.swing.JFrame {
-
+public class FrmPanelLlegadas extends javax.swing.JFrame {
+    
     SimpleDateFormat sdH = new SimpleDateFormat ("dd/MM/yyyy");
+
     /**
-     * Creates new form FrmPanelSalida
+     * Creates new form FrmPanelLlegadas
      */
-    public FrmPanelSalida() {
+    public FrmPanelLlegadas() {
         initComponents();
-        //fillTableVuelosDiarios();
         
         Date fecha_Actual = new Date();
         txtFecha.setText(sdH.format(fecha_Actual));
         fillTableVuelosDiarios1();
-        
-        
     }
 
     /**
@@ -46,15 +44,15 @@ public class FrmPanelSalida extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPanelSalidas = new javax.swing.JTable();
+        tblPanelLlegadas = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtFecha = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         txtError = new javax.swing.JTextField();
 
-        setTitle("Panel de Salidas");
+        setTitle("Panel de Llegadas");
 
-        tblPanelSalidas.setModel(new javax.swing.table.DefaultTableModel(
+        tblPanelLlegadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -65,7 +63,7 @@ public class FrmPanelSalida extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblPanelSalidas);
+        jScrollPane1.setViewportView(tblPanelLlegadas);
 
         jLabel1.setText("Inserta la fecha (Ej: 01/01/2024):");
 
@@ -81,29 +79,29 @@ public class FrmPanelSalida extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar))
                     .addComponent(txtError, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(55, 55, 55))
+                .addGap(92, 92, 92))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBuscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtError, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9))
         );
@@ -113,9 +111,8 @@ public class FrmPanelSalida extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        fillTableVuelosDiarios1();
-       
-        
+            fillTableVuelosDiarios1();
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 private static List<VueloDiario> lstPanelSalida = new ArrayList<>();
@@ -134,18 +131,17 @@ public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblPanelSalidas;
+    private javax.swing.JTable tblPanelLlegadas;
     private javax.swing.JTextField txtError;
     private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
-
 
     private void fillTableVuelosDiarios1() {
         try {
             txtError.setText("");
             txtError.setEnabled(true);
             Date fecha_Buscar = sdH.parse(txtFecha.getText());
-            tblPanelSalidas.setModel(new VuelosDiariosModelTable(getSalidasByDate(fecha_Buscar)));
+            tblPanelLlegadas.setModel(new VuelosDiariosModelTable(getSalidasByDate(fecha_Buscar)));
             if(getSalidasByDate(fecha_Buscar).isEmpty()){
                 txtError.setText("No hay vuelos para esa fecha. Intentelo con otra fecha. Gracias");
             }else{
@@ -160,7 +156,7 @@ public static List<VueloDiario> getSalidasByDate(Date fecha_Buscar) {
     }
     
     private void fillTableVuelosDiarios() {
-        tblPanelSalidas.setModel(new VuelosDiariosModelTable(LogicaNegocio.getAllVueloDiario()));
+        tblPanelLlegadas.setModel(new VuelosDiariosModelTable(LogicaNegocio.getAllVueloDiario()));
         
     }
 
